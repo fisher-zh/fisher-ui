@@ -1,6 +1,6 @@
-# mobile-ui
+# fisher-ui
 
-> mobile-ui for pc
+> fisher-ui for pc
 
 ## Build Setup
 
