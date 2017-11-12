@@ -62,3 +62,4 @@ const MessageBox = (options, callback) => {
 }
 
 export default MessageBox
+export { MessageBox }
