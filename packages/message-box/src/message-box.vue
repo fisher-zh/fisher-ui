@@ -1,13 +1,13 @@
 <template>
-  <div v-show="visible" class="mbui-message-box__wrapper">
-    <div @click="doClose" class="mbui-mask"></div>
-    <div class="mbui-message-box">
-      <div @click="doClose('close')" class="mbui-message-box__close"></div>
-      <div class="mbui-message-box__title">{{ title }}</div>
-      <div class="mbui-message-box__msg">{{ msg }}</div>
-      <div class="mbui-message-box__btns">
-        <button @click="doClose('cancel')" class="mbui-btn">{{ cancelText }}</button>
-        <button @click="doClose('confirm')" class="mbui-btn">{{ confirmText }}</button>
+  <div v-show="visible" class="fs-message-box__wrapper">
+    <div @click="doClose" class="fs-mask"></div>
+    <div class="fs-message-box">
+      <div @click="doClose('close')" class="fs-message-box__close"></div>
+      <div class="fs-message-box__title">{{ title }}</div>
+      <div class="fs-message-box__msg">{{ msg }}</div>
+      <div class="fs-message-box__btns">
+        <button @click="doClose('cancel')" class="fs-btn">{{ cancelText }}</button>
+        <button @click="doClose('confirm')" class="fs-btn">{{ confirmText }}</button>
       </div>
     </div>
   </div>
@@ -37,7 +37,7 @@
   }
 </script>
 <style>
-.mbui-message-box__wrapper {
+.fs-message-box__wrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -45,14 +45,14 @@
   height: 100%;
   text-align: center;
 }
-.mbui-message-box__wrapper:after {
+.fs-message-box__wrapper:after {
   content: "";
   display: inline-block;
   height: 100%;
   width: 0;
   vertical-align: middle;
 }
-.mbui-message-box {
+.fs-message-box {
   position: relative;
   display: inline-block;
   vertical-align: middle;
@@ -65,7 +65,7 @@
   text-align: left;
   overflow: hidden;
 }
-.mbui-message-box__close {
+.fs-message-box__close {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -75,22 +75,22 @@
   background-size: 100% 100%;
   cursor: pointer;
 }
-.mbui-message-box__title {
+.fs-message-box__title {
   font-size: 20px;
   height: 24px;
   color: #333;
 }
-.mbui-message-box__msg {
+.fs-message-box__msg {
   margin: 20px 0;
   font-size: 16px;
   color: #48576a;
 }
-.mbui-message-box__btns {
+.fs-message-box__btns {
   position: relative;
   text-align: right;
   height: 30px;
 }
-.mbui-btn {
+.fs-btn {
   width: 80px;
   height: 30px;
   border: 1px solid #48576a;
@@ -99,7 +99,7 @@
   background-color: #fffafa;
   cursor: pointer;
 }
-.mbui-mask {
+.fs-mask {
   position: absolute;
   left: 0;
   top: 0;

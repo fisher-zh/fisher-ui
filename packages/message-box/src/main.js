@@ -5,7 +5,7 @@ const MessageBoxConstructor = Vue.extend(MessageBoxVue)
 
 let instance // messagebox  vue对象
 let msgQueue = []
-let currentBox
+let currentBox = []
 
 const initInstance = () => {
   instance = new MessageBoxConstructor({

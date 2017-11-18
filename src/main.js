@@ -4,7 +4,9 @@ import Vue from 'vue'
 import App from './App'
 
 import MessageBox from '../packages/message-box'
+import upload from '../packages/upload'
 Vue.use(MessageBox)
+Vue.use(upload)
 
 Vue.config.productionTip = false
 

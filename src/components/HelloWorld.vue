@@ -1,7 +1,8 @@
 <template>
   <div class="hello" style="height: 1000px;">
-    <h1>{{ msg }}</h1>
+    <h1 @click="alert2">{{ msg }}</h1>
     <h2 @click="alertMessage">click me, test messagebox</h2>
+    <fs-upload url="https://jsonplaceholder.typicode.com/posts/"></fs-upload>
   </div>
 </template>
 
@@ -18,6 +19,16 @@ export default {
     alertMessage () {
       this.$messageBox({
         title: '123',
+        msg: '456',
+        confirmText: 'confirm1',
+        cancelText: 'cancel1'
+      })
+      .then(res => {
+        console.log(res)
+      })
+    },
+    alert2 () {
+      this.$messageBox({
         msg: '456'
       })
       .then(res => {
