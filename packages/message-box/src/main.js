@@ -33,8 +33,13 @@ const showMsg = () => {
 const defaultCallback = (action) => {
   // 首先判断当前的弹窗是否有值
   if (currentBox) {
-    document.body.removeChild(instance.$el);
-    currentBox.resolve(action)
+    if (currentBox.resolve) {
+      currentBox.resolve(action)
+    }
+    let timer = setTimeout(_ => {
+      document.body.removeChild(instance.$el);
+      clearTimeout(timer)
+    }, 0)
   }
 }
 
