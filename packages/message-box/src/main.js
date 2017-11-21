@@ -5,7 +5,7 @@ const MessageBoxConstructor = Vue.extend(MessageBoxVue)
 
 let instance // messagebox  vue对象
 let msgQueue = []
-let currentBox = []
+let currentMsg
 
 const initInstance = () => {
   instance = new MessageBoxConstructor({
@@ -15,26 +15,35 @@ const initInstance = () => {
 }
 
 const showMsg = () => {
-  initInstance()
-  document.body.appendChild(instance.$el);
-  currentBox = msgQueue.pop()
-  // 遍历传入的属性 赋值给instance
-  let options = currentBox.options;
-  for (let prop in options) {
-    if (options.hasOwnProperty(prop)) {
-      instance[prop] = options[prop];
-    }
+  if (!instance) {
+    initInstance()
   }
-  Vue.nextTick(() => {
-    instance.visible = true;
-  })
+  if (!instance.visible) {
+    if (msgQueue.length > 0) {
+      currentMsg = msgQueue.shift()
+    }
+    document.body.appendChild(instance.$el);
+    // 遍历传入的属性 赋值给instance
+    let options = currentMsg.options;
+    for (let prop in options) {
+      if (options.hasOwnProperty(prop)) {
+        instance[prop] = options[prop];
+      }
+    }
+    if (options.callback === undefined) {
+      instance.callback = defaultCallback;
+    }
+    Vue.nextTick(() => {
+      instance.visible = true;
+    })
+  }
 }
 
 const defaultCallback = (action) => {
   // 首先判断当前的弹窗是否有值
-  if (currentBox) {
-    if (currentBox.resolve) {
-      currentBox.resolve(action)
+  if (currentMsg) {
+    if (currentMsg.resolve) {
+      currentMsg.resolve(action)
     }
     let timer = setTimeout(_ => {
       document.body.removeChild(instance.$el);
@@ -49,12 +58,13 @@ const MessageBox = (options, callback) => {
   }
   if (typeof Promise !== 'undefined') {
     return new Promise((resolve, reject) => { // eslint-disable-line
-      msgQueue.push({
+      currentMsg = {
         options: options,
         callback: callback,
         resolve: resolve,
         reject: reject
-      })
+      }
+      msgQueue.push(currentMsg)
       showMsg()
     })
   } else {
@@ -67,4 +77,3 @@ const MessageBox = (options, callback) => {
 }
 
 export default MessageBox
-export { MessageBox }
