@@ -3,6 +3,7 @@
     <h1 @click="alert2">{{ msg }}</h1>
     <h2 @click="alertMessage">click me, test messagebox</h2>
     <fs-upload url="https://jsonplaceholder.typicode.com/posts/"></fs-upload>
+    <div v-loading="true" style="width: 200px; height: 200px;">loading</div>
   </div>
 </template>
 

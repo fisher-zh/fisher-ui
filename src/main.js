@@ -5,8 +5,10 @@ import App from './App'
 
 import MessageBox from '../packages/message-box'
 import upload from '../packages/upload'
+import loading from '../packages/loading'
 Vue.use(MessageBox)
 Vue.use(upload)
+Vue.use(loading)
 
 Vue.config.productionTip = false
 
