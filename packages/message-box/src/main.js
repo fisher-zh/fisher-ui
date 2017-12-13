@@ -3,25 +3,21 @@ import MessageBoxVue from './message-box.vue'
 
 const MessageBoxConstructor = Vue.extend(MessageBoxVue)
 
-let instance // messagebox  vue对象
-let msgQueue = []
+let instanceStack = [] // messagebox  vue对象
+let msgStack = []
 let currentMsg
 
-const initInstance = () => {
-  instance = new MessageBoxConstructor({
+const showMsg = () => {
+  // 初始化instance对象
+  const instance = new MessageBoxConstructor({
     el: document.createElement('div')
   })
   instance.callback = defaultCallback
-}
+  instanceStack.push(instance)
 
-const showMsg = () => {
-  if (!instance) {
-    initInstance()
-  }
   if (!instance.visible) {
-    if (msgQueue.length > 0) {
-      currentMsg = msgQueue.shift()
-    }
+    console.log('-------')
+    console.log(msgStack)
     document.body.appendChild(instance.$el);
     // 遍历传入的属性 赋值给instance
     let options = currentMsg.options;
@@ -40,10 +36,15 @@ const showMsg = () => {
 }
 
 const defaultCallback = (action) => {
+  let instance = null
   // 首先判断当前的弹窗是否有值
   if (currentMsg) {
     if (currentMsg.resolve) {
       currentMsg.resolve(action)
+    }
+    // 获取最后入栈的对象
+    if (instanceStack.length > 0) {
+      instance = instanceStack.pop()
     }
     let timer = setTimeout(_ => {
       document.body.removeChild(instance.$el);
@@ -64,11 +65,11 @@ const MessageBox = (options, callback) => {
         resolve: resolve,
         reject: reject
       }
-      msgQueue.push(currentMsg)
+      msgStack.push(currentMsg)
       showMsg()
     })
   } else {
-    msgQueue.push({
+    msgStack.push({
       options: options,
       callback: callback
     })
