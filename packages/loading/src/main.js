@@ -8,7 +8,6 @@ let defaultData = () => {
     color: '#000'
   }
 }
-let instance = null
 
 const install = (Vue, options) => {
   Vue.directive('loading', {
@@ -34,20 +33,22 @@ const install = (Vue, options) => {
       if (spinnerBgColor) {
         data.background = spinnerBgColor
       }
-      instance = new LoadingConstructor({
+      const mask = new LoadingConstructor({
         el: document.createElement('div'),
         data: data
       })
-      el.appendChild(instance.$el)
+      el.instance = mask
+      el.mask = mask.$el
+      el.appendChild(mask.$el)
       // console.log(el.style.position)
     },
     update: function (el, binding) {
       // console.log(binding.value)
-      instance.$data.visible = binding.value
+      el.instance.$data.visible = binding.value
     },
     unbind: function (el, binding) {
-      if (instance) {
-        el.removeChild(instance.$el)
+      if (el.instance) {
+        el.removeChild(el.mask)
       }
     }
   })
