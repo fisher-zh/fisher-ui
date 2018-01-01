@@ -16,7 +16,7 @@ const install = (Vue, options) => {
         el.style.position = 'relative'
       }
       // 设置各个参数
-      console.log('===========')
+      // console.log('===========')
       const spinnerColor = el.getAttribute('fs-loading-color')
       const spinnerText = el.getAttribute('fs-loading-text')
       const spinnerBgColor = el.getAttribute('fs-loading-background')
