@@ -1,5 +1,5 @@
-import install from './src/main.js'
+import Loading from './src/main.js'
 
 export default {
-  install
+  Loading
 }

@@ -1,9 +1,6 @@
-import upload from './upload.vue'
-const install = function(Vue, opt = {}) {
-  Vue.component(upload.name, upload);
+import Upload from './upload.vue'
+Upload.install = function(Vue, opt = {}) {
+  Vue.component(Upload.name, Upload);
 }
 
-export default {
-  install,
-  upload
-}
+export default Upload

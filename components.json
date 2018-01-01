@@ -1,0 +1,6 @@
+{
+  "upload": "./packages/upload/index.js",
+  "loading": "./packages/loading/index.js",
+  "messagebox": "./packages/message-box/index.js",
+  "index": "./packages/index.js"
+}
