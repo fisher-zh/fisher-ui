@@ -1,7 +1,5 @@
-import Vue from 'vue'
 import fsLoading from './fs-loading.vue'
 
-const LoadingConstructor = Vue.extend(fsLoading)
 let defaultData = () => {
   return {
     visible: false,
@@ -10,6 +8,7 @@ let defaultData = () => {
 }
 
 const install = (Vue, options) => {
+  const LoadingConstructor = Vue.extend(fsLoading)
   Vue.directive('loading', {
     bind: function (el, binding, vnode) {
       // 判断是否可以定位，不可以则添加position
